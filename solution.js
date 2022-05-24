@@ -7,3 +7,5 @@ function solution(nums) {
     return numsSet.size;
   }
 }
+
+// test
