@@ -1,70 +1,24 @@
-console.log(solution(13, 17));
-
-function solution(left, right) {
-  const arr = [];
-  let temp = 0;
-  let value = left;
-  let count2 = 1;
-  let count3 = 1;
-  let count5 = 1;
-  let count7 = 1;
-  let count13 = 1;
+function solution(d, budget) {
+  // 예산 신청 배열, 예산 합계
+  d.sort((a, b) => a - b);
+  console.log(d);
+  let sum = 0;
   let answer = 0;
-
-  for (let i = 0; i <= right - left; i++) {
-    temp = value;
-    count2 = 1;
-    count3 = 1;
-    count5 = 1;
-    count7 = 1;
-    count13 = 1;
-    arr.push(value);
-    while (arr[i] % 2 !== 0) {
-      // 13
-      if (arr[i] % 2 === 0) {
-        temp /= 2;
-        count2++; // 1
-      }
-    }
-    while (arr[i] % 3 !== 0) {
-      // 13
-      if (arr[i] % 3 === 0) {
-        temp /= 3;
-        count3++; // 1
-      }
-    }
-    while (arr[i] % 5 !== 0) {
-      // 13
-      if (arr[i] % 5 === 0) {
-        temp /= 5;
-        count5++;
-      }
-    }
-    while (arr[i] % 7 !== 0) {
-      // 13
-      if (arr[i] % 7 === 0) {
-        temp /= 7;
-        count7++;
-      }
-    }
-    while (arr[i] % 13 !== 0) {
-      //
-      if (arr[i] % 13 === 0) {
-        temp /= 13;
-        count13++;
-      }
-    }
-    if ((count2 * count3 * count5 * count7 * count13) % 2 === 0) {
-      answer += value;
+  for (let i = 0; i < d.length; i++) {
+    sum += d[i];
+    if (sum > budget) {
+      answer = i;
+      break;
     } else {
-      answer -= value;
+      answer = i + 1;
     }
-    console.log(count2);
-    value++;
   }
   return answer;
 }
 
-// 2, 3, 5, 7, 13, 17 다 곱하면 4만 6천 13 은 2640... 13까지로 소인수 분해
-// 소인수로 나눠지지 않을 경우 다음 소인수로 넘어간다.
-// 무한루프................
+// 많은 부서에게 줘야 한다.
+// 최소를부른 부서부터 최대를 부른 부서로 순서를 잡는 방향으로 설정하는 것이 다수를 만족시킬 수 있다.
+// 합계 > 예산 상황이 나오면 스톱하는 반복문이 필요하다.
+
+// 1. 예산 신청서를 오름차순으로 정렬한다.
+// 2. 합계를 구해가면 반복문을 돌고 , 반복횟수를 카운팅 한다.
