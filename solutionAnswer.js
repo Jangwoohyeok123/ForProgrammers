@@ -1,14 +1,17 @@
-function solution(numbers) {
-  const temp = [];
-  for (let i = 0; i < numbers.length; i++) {
-    for (let j = i + 1; j < numbers.length; j++) {
-      temp.push(numbers[i] + numbers[j]);
-    }
-  }
-  const answer = [...new Set(temp)];
-  return answer.sort((a, b) => a - b);
-}
+function solution(N, stages) {
+  let answer = [];
 
-// ..new Set(중복을 없애고 싶은 list) 를 [] 연산자 안에 선언하며, answer 객체를 생성
-// code가 짧아짐
-// const answer = [...new Set(temp)]; 점이 세개다!
+  let people = stages.length;
+  stages = stages.sort((a, b) => a - b);
+  for (let i = 1; i <= N + 1; i++) {
+    let temp = stages.filter(n => n === i).length; // filter op챔..
+    answer.push([i, temp / people]);
+    people -= temp;
+  }
+
+  answer.pop(); // 아마 1일 것이고 이는 성공률이므로 제외
+
+  answer = answer.sort((a, b) => b[1] - a[1]); // ㄷㄷ;; 2 번째 요소로 내림차순이 가능함
+
+  return answer.map(a => a[0]); // ????
+}
