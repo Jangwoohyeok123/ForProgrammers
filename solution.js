@@ -1,26 +1,38 @@
-function solution(N, stages) {
-  let count = 0;
-  const arrNum = [];
-  for(let i = 1; i <= N; i++){
-    arrNum.push(i);
-  }
-
-  stages = stages.sort((a,b)=> a-b);
-  
-  for(let i = 0; i < arrNum.length; i++){
-    for(let j= 0; j < stages.length; j++){
-      
+function solution(a, b) {
+  let temp = 0;
+  let answer = "";
+  const arr = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 2~
+  if (a !== 1 || a !== 12) {
+    for (let i = 0; i < a - 1; i++) {
+      temp += arr[i];
     }
+    temp += b;
+  } else {
+    temp = b;
   }
-
-  var answer = [];
-  return answer;
+  console.log(temp);
+  switch (temp % 7) {
+    case 1:
+      return "FRI";
+    case 2:
+      return "SAT";
+    case 3:
+      return "SUN";
+    case 4:
+      return "MON";
+    case 5:
+      return "TUE";
+    case 6:
+      return "WED";
+    case 0:
+      return "THU";
+  }
 }
-
-// 1. sort 오름차순
-// 2. 같은 스테이지 숫자 카운팅 
-//    - 다른 값이 나올 경우 map 에 key:stage , value:실패율 푸쉬
-//      - 분자 초기화, 분모 = 분모 - 분자
-//    - 마지막 스테이지가 나올 경우 map 에 푸쉬 후 break;
-// 3. map value 값을 기준으로 내림차순 정렬 후 key 값을 result 배열에 push
-// 4. return result;
+//금 1 1
+//토 2 2
+//일 3 3
+//월 4 4
+//화 5 5
+//수 6  == %7 == 6
+//목 7  == %7 == 0
+//SUN,MON,TUE,WED,THU,FRI,SAT
