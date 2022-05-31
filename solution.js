@@ -1,17 +1,18 @@
-function solution(price, money, count) {
-  let sum = 0;
-  let temp = 0;
-  for (let i = 0; i < count; i++) {
-    temp += price;
-    sum += temp;
+function solution(s) {
+  const size = s.length;
+  let answer = "";
+  const half = size / 2;
+  if (size % 2 === 0) {
+    answer += s.charAt(half - 1);
+    answer += s.charAt(half);
+  } else {
+    answer += s.charAt(Math.floor(half));
   }
-  return money < sum ? sum - money : 0;
+  return answer;
 }
 
-// 1 = price * 1
-// 2 = price * 2
-// 3 = price * 3
-// 4 = price * count...
-// sum = 1 + 2 + 3 + 4...
-// money < sum  => 돈이 부족한 것 --> return sum - money
-// money > sum  => 돈이 남는 것 --> return 0;
+// 1. 배열의 사이즈를 구한다.
+// 2. 2로 나눠
+//  - 2로 나눠지지 않을 경우 .. 내림
+//  - 2로 나눠질 경우  반 , 반 - 1
+// 3.

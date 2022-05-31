@@ -1,4 +1,10 @@
-function solution(price, money, count) {
-    const tmp = price * count * (count + 1) / 2 - money;
-    return tmp > 0 ? tmp : 0;
+function solution(s) {
+  var answer = "";
+  var length = s.length;
+  if (length % 2 == 0) {
+    answer = s[length / 2 - 1] + s[length / 2];
+  } else {
+    answer = s[length / 2 - 0.5];
+  }
+  return answer;
 }
