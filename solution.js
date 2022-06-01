@@ -1,18 +1,31 @@
-function solution(s) {
-  const size = s.length;
-  let answer = "";
-  const half = size / 2;
-  if (size % 2 === 0) {
-    answer += s.charAt(half - 1);
-    answer += s.charAt(half);
-  } else {
-    answer += s.charAt(Math.floor(half));
+function solution(n, arr1, arr2) {
+  const el = n - 1;
+  let count = 0;
+  let temp = "";
+  const tempArr = [];
+  const answer = {};
+  for (let i = 0; i < n; i++) {
+    tempArr.push(arr1[i] | arr2[i]);
   }
-  return answer;
+  for (let i = 0; i < n; i++) {
+    for (let j = el; j >= 0; j--) {
+      if (tempArr[i] >= 2 ** j) {
+        tempArr[i] -= 2 ** j;
+        temp += "#";
+      } else {
+        temp += " ";
+      }
+    }
+    answer.push(temp);
+    temp = "";
+  }
+  return answer
 }
 
-// 1. 배열의 사이즈를 구한다.
-// 2. 2로 나눠
-//  - 2로 나눠지지 않을 경우 .. 내림
-//  - 2로 나눠질 경우  반 , 반 - 1
-// 3.
+// 1. 한 변의 길이 구하기 == n
+// 2. or 연산자 사용
+// 3. 결과 배열 저장
+
+// 3. 결과값을 이진수로 표현 => 1은 #으로 표현
+// for 2 ** n - 1 -> 2 ** 0
+// if 변수값 > element 2거듭제곱 값 => -= 변수값
