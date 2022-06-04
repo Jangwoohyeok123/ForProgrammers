@@ -1,10 +1,19 @@
-function solution(arr) {
+function solution(arr, divisor) {
+  let count = 0;
   const answer = [];
-  answer.push(arr[0]);
-  for (let i = 1; i < arr.length; i++) {
-    if (arr[i] !== arr[i - 1]) answer.push(arr[i]);
-  }
-  return answer;
+
+  arr.forEach(element => {
+    if (element % divisor == 0) {
+      count++;
+      answer.push(element);
+    }
+  });
+  let temp = [];
+  temp.push(-1);
+  if (count === 0) return temp;
+  return answer.sort((a, b) => a - b);
 }
-// 첫번째 요소는 무조건 푸쉬
-// 두번째 요소부터 앞의 요소와 다를 경우 푸쉬
+// arr 돌면서 각 element를 나눈다.
+// 나눠질 경우 count++, answer.push(element);
+// if count == 0  return -1
+// else return answer.sort((a,b) a-b);

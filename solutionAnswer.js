@@ -1,3 +1,4 @@
-function solution(arr) {
-  return arr.filter((val, index) => val != arr[index + 1]);
+function solution(arr, divisor) {
+    var answer = arr.filter(v => v%divisor == 0);
+    return answer.length == 0 ? [-1] : answer.sort((a,b) => a-b);
 }
