@@ -1,5 +1,10 @@
-function solution(a, b) {
-  return ((a + b) / 2) * (Math.abs(a - b) + 1);
+function solution(n) {
+  const count = n - 1;
+  for (let i = 1; i <= count; i++) {
+    if (n % i == 1) return i;
+  }
 }
 
-// a + b / 2 * (a-b의 절댓값 + 1) ;
+// n-1 부터 1 까지 순차적으로 나눈다.
+// % 결과가 1인 경우 배열에 추가한다.
+// 배열.length의 값을 answer로 return
