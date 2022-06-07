@@ -1,10 +1,13 @@
-function solution(n) {
-  const count = n - 1;
-  for (let i = 1; i <= count; i++) {
-    if (n % i == 1) return i;
-  }
+function solution(strings, n) {
+  const answer = strings.sort((a, b) => {
+    if (a[n] > b[n]) return 1; // a가 b 앞으로
+    if (a[n] < b[n]) return -1; //b가 a 앞으로
+    else {
+      if (a > b) return 1;
+      else return -1;
+    }
+  });
+  return answer;
 }
-
-// n-1 부터 1 까지 순차적으로 나눈다.
-// % 결과가 1인 경우 배열에 추가한다.
-// 배열.length의 값을 answer로 return
+// 사전순으로 정렬된다. 
+// => sort가 기본적으로 utf-16으로 분석하는 것이므로 따로해줄일 없다.
