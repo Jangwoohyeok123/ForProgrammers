@@ -1,13 +1,11 @@
-function solution(strings, n) {
-  const answer = strings.sort((a, b) => {
-    if (a[n] > b[n]) return 1; // a가 b 앞으로
-    if (a[n] < b[n]) return -1; //b가 a 앞으로
-    else {
-      if (a > b) return 1;
-      else return -1;
-    }
+function solution(s) {
+  let p = 0;
+  let y = 0;
+  const tmp = Array.from(s);
+  tmp.forEach(element => {
+    if (element === "p" || element === "P") p++;
+    if (element === "Y" || element === "y") y++;
   });
-  return answer;
+  if (p == y) return true;
+  else return false;
 }
-// 사전순으로 정렬된다. 
-// => sort가 기본적으로 utf-16으로 분석하는 것이므로 따로해줄일 없다.
