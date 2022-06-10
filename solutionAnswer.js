@@ -1,11 +1,22 @@
 function solution(s) {
-  const temp = s.split("");
-  const tmp2 = temp.sort((a, b) => b.charCodeAt() - a.charCodeAt());
-  const answer = tmp2.join(""); // 매개변수 : 배열의 각 요소를 구분할 문자열을 지정한다.
-  return answer;
+  let result = false;
+  if ((s.length == 4 || s.length == 6) && /^\d+$/.test(s)) {
+    result = true;
+  }
+  return result;
 }
 
-// 스트링을 역순으로 바꾸는 방법
-// 1. 배열화시킴
-// 2. sort((a,b) => b.charCodeAt() - a.charCodeAt()) 꼴로.. 
-// 3. 배열을 합치기에는 join을 사용하기
+/*
+같은코드
+function solution(s){
+  let result = false;
+  if((s.length == 4 || s.length == 6) && /^[0-9]+$/.test(s)) {
+    result = true;
+  }
+  return result;
+}
+^ : 줄의 시작을 정의 위의 코드는 digit으로 시작한다의 의미
+\d : 0123456789 범위
++ : 문자가 1개 이상 나타남을 의미
+예시 : \^[a-z]+$\.test(s) , \^[0-9a-zA-Z]+$\.test(s) => 정규식에 부합하는지 확인 부합할 경우 true else false 
+*/
