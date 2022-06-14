@@ -1,21 +1,27 @@
-function a(x, y) {
-  if (x % y === 0) return y;
-  return a(y, x % y);
-}
-
-function solution(w, h) {
-  for (let i = 0; i < w / a(w, h); i++) {
-    
+function solution(progresses, speeds) {
+  const arr = [];
+  while (progresses.length !== 0) {
+    for (let i = 0; i < progresses.length; i++) {
+      progresses[i] += speeds[i];
+      if (progresses[i] >= 100) progresses = 100;
+    }
+    if (progresses[0] === 100) {
+      progresses.shift();
+      let cnt = 1;
+      while (progresses[cnt] === 100) {
+        progresses.shift();
+        cnt++;
+      }
+      arr.push(cnt);
+    }
   }
-  var answer = 1;
+  const answer = arr;
   return answer;
 }
 
-// w,h 를 최대공약수로 나누고 곱하면, 다뤄야 할 단위가 나온다.
-// 지나가는 사각형의 갯수를 구한다.
-// 단위의 총 갯수 = 단위 * (한 변/ 최대공약수)
-
-// 최대공약수..
-// 8 12
-// 12 8
-// 8 4 => 뒤에 놈 return
+// progress 가 없어질때까지
+// progresses + speeds
+// 100이상 => 100 => 배열검사
+// 0 === 100, 1 === 100?
+// o => cnt++; (cnt = 1로 시작)
+// x +> return cnt;
