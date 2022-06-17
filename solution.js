@@ -1,18 +1,40 @@
-function solution(s) {
+function solution(n) {
   let answer = "";
-  const arr = s.split(" ");
-  for (let i = 0; i < arr.length; i++) {
-    const temp = Array.from(arr[i]);
-    for (let i = 0; i < temp.length; i++) {
-      let tempChar = "";
-      if (i % 2 === 0) {
-        tempChar = temp[i].toUpperCase();
-      } else {
-        tempChar = temp[i].toLowerCase();
-      }
-      answer += tempChar;
+  while (n > 0) {
+    if (n % 3 === 1) {
+      answer = "1" + answer;
+      n = Math.floor(n / 3);
+    } else if (n % 3 === 2) {
+      answer = "2" + answer;
+      n = Math.floor(n / 3);
+    } else if (n % 3 === 0) {
+      answer = "4" + answer;
+      n = n / 3 - 1; // 1이 나오면 안됨 // 시간이 없다면 재귀적 사고로 -1 넣어버리자
     }
-    if (i !== arr.length - 1) answer += " ";
   }
   return answer;
 }
+// 진법 문제는 뒤에서 부터 떄려부심
+// 큰 수를 이용해 %계산하고 진법으로 /한다. 
+// 12 => 4 - 1 = 3 => 44 => o 항이 2개나 맞으므로 일반화 ㄱ
+/*
+1 1  1 = [0] 
+2 2  2 = [1]
+3 4  4 = [2]
+-----
+4 11  = [0] * 10 + [0]
+5 12  = [0] * 10 + [1]
+6 14  = [0] * 10
+-----
+7 21
+8 22
+9 24
+-----
+10 41
+11 42
+12 44
+3^1 3^2 3^3 3^4 3^5
+-> 3으로 계속 나누어 자리수를 찾는다. 
+1. 자리수 만큼 배열을 만들고 1로 초기화 
+2. 큰 자리수를 구하기 위해 /3 을 해 ~1/3:1, ~2/3:2, ~3/3: 4  
+*/
