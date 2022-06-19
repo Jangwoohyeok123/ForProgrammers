@@ -1,21 +1,28 @@
-function isPrime(x) {
-  for (let i = 2; i <= Math.sqrt(x); i++) {
-    if (x % i === 0) return false;
+function solution(id_list, report, k) {
+  var answer = [];
+  let s = id_list.map(x => {
+      return {uid: x, sid: [], cid: [], count: 0};
+  })
+  for(let i = 0 ; i < report.length; i++) {
+      const data = report[i].split(' ');
+      const uid = s.findIndex(x => x.uid === data[0]);
+      const sid = s.findIndex(x => x.uid === data[1]);
+      if(s[uid].sid.indexOf(data[1]) < 0) {
+          s[uid].sid.push(data[1]);
+          s[sid].count++;
+      }
   }
-  return true;
-}
-
-function solution(n) {
-  let answer = 0;
-  for (let i = 2; i <= n; i++) {
-    if(isPrime(i)) answer++; // 만약 소수만 찾아내라면 push(i);
-  }
+  s.forEach((result) => {
+      const data = result.sid.findIndex(x => {
+          s.findIndex(a => {
+              if(x === a.uid && a.count >= k) {
+                  result.cid.push(a.uid);
+              }
+          })
+      }); 
+  });
+  answer = s.map((k) => {
+      return k.cid.length;
+  })
   return answer;
 }
-
-// 소수 문제는 홍진호다 (for+if)가 2개... 시작이 2개... 함수가 2개
-// 제곱근까지 반복문 돌리고 뒤집어서 나머지 검사
-// 2 , <= 제곱근
-// 제곱근 % i === 0 false;
-//                  true; => count++
-

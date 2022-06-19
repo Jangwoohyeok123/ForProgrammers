@@ -1,19 +1,32 @@
-function solution(n) {
-  let answer = 0;
-  let isPrime;
-  for (let i = 2; i <= n; i++) {
-    isPrime = true;
-    for(let j = 2; j < i; j++){
-      if(i % j === 0){
-        isPrime = false;
-        break;
-      } 
+function solution(id_list, report, k) {
+  const answer = new Array(id_list.length);
+  answer.fill(0);
+  const report_list = {};
+
+  id_list.map(user => {
+    report_list[user] = [];
+  });
+  console.log(id_list);
+
+
+  report.map(user => {
+    const [user_id, report_id] = user.split(" ");
+    if (!report_list[report_id].includes(user_id)) {
+      report_list[report_id].push(user_id);
     }
-    if(isPrime) answer++;
+  });
+  console.log(report);
+
+  for (const key in report_list) {
+    if (report_list[key].length >= k) {
+      report_list[key].map(user => {
+        answer[id_list.indexOf(user)] += 1;
+      });
+    }
   }
   return answer;
 }
 
-// 2 ~ n-1 중 나눠지면 소수 x
-// 3 
- 
+// report split 2번
+// id_list cnt++;
+//
