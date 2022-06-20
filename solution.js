@@ -1,32 +1,30 @@
-function solution(id_list, report, k) {
-  const answer = new Array(id_list.length);
-  answer.fill(0);
-  const report_list = {};
-
-  id_list.map(user => {
-    report_list[user] = [];
-  });
-  console.log(id_list);
-
-
-  report.map(user => {
-    const [user_id, report_id] = user.split(" ");
-    if (!report_list[report_id].includes(user_id)) {
-      report_list[report_id].push(user_id);
-    }
-  });
-  console.log(report);
-
-  for (const key in report_list) {
-    if (report_list[key].length >= k) {
-      report_list[key].map(user => {
-        answer[id_list.indexOf(user)] += 1;
-      });
-    }
+function sqrt(n) {
+  let temp = Math.sqrt(n);
+  for (let i = 2; i <= temp; i++) {
+    if (temp % i == 0) return false;
   }
+  return true;
+}
+
+function solution(numbers) {
+  let numArr = Array.from(numbers);
+  
+  var answer = 0;
   return answer;
 }
 
-// report split 2번
-// id_list cnt++;
-//
+// 조합을 한다.
+// 문자열을 하나씩 쪼갠다. =>
+// 숫자를 1자리부터 만들어 본다.
+// 순서 상관 o => 순열조합문제같다... 머리가 순백하다
+// 숫자가 기존의 결과 배열에 있다면 추가x
+// sqrt 에 보내어 소수판별을 한다.
+// 소수일 경우 cnt++;
+// 결과 배열에 소수 추가
+
+/*
+for (let i = 0; i < numArr.length; i++) {
+    numArr[i] = parseInt(numArr[i]);
+  }
+  
+*/
