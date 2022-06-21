@@ -1,30 +1,17 @@
-function sqrt(n) {
-  let temp = Math.sqrt(n);
-  for (let i = 2; i <= temp; i++) {
-    if (temp % i == 0) return false;
-  }
-  return true;
+function solution(n, m) {
+  return [G(n, m), (n * m) / G(n, m)];
 }
 
-function solution(numbers) {
-  let numArr = Array.from(numbers);
-  
-  var answer = 0;
-  return answer;
+function G(n, m) {
+  if (n % m == 0) return m;
+  return G(m, n % m);
 }
 
-// 조합을 한다.
-// 문자열을 하나씩 쪼갠다. =>
-// 숫자를 1자리부터 만들어 본다.
-// 순서 상관 o => 순열조합문제같다... 머리가 순백하다
-// 숫자가 기존의 결과 배열에 있다면 추가x
-// sqrt 에 보내어 소수판별을 한다.
-// 소수일 경우 cnt++;
-// 결과 배열에 소수 추가
+// 12 7
+// 7 5
+// 5 2
+// 2 1 => 1 (종결조건)
 
-/*
-for (let i = 0; i < numArr.length; i++) {
-    numArr[i] = parseInt(numArr[i]);
-  }
-  
-*/
+// LG = AB
+// LG = a * G * b * G
+// L = abG
