@@ -1,17 +1,14 @@
-function solution(n, m) {
-  return [G(n, m), (n * m) / G(n, m)];
+function solution(num) {
+  if (num == 1) return 0;
+  const answer = recursive(num);
+  return answer;
 }
-
-function G(n, m) {
-  if (n % m == 0) return m;
-  return G(m, n % m);
+let count = 0;
+function recursive(n) {
+  if (n % 2 == 0) n /= 2;
+  else n = n * 3 + 1;
+  count++;
+  if (n == 1) return count;
+  if (count == 500) return -1;
+  return recursive(n);
 }
-
-// 12 7
-// 7 5
-// 5 2
-// 2 1 => 1 (종결조건)
-
-// LG = AB
-// LG = a * G * b * G
-// L = abG

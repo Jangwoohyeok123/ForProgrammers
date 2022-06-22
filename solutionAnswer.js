@@ -1,18 +1,12 @@
-function solution(n, m) {
-  return [gcd(n, m), (n * m) / gcd(n, m)];
+function collatz(num) {
+  for (var answer = 0; answer < 500; answer++) {
+    if (num % 2 == 0) {
+      num = num / 2;
+    } else if (num == 1) {
+      return answer;
+    } else if (num % 2 == 1) {
+      num = num * 3 + 1;
+    }
+  }
+  return -1;
 }
-
-function gcd(n, m) {
-  if (n % m == 0) return m;
-  return G(m, n % m);
-}
-
-// AB = LG 때문에 최대공약수만 찾으면 됨
-
-
-
-
-
-
-
-
