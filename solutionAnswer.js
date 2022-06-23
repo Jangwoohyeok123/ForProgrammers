@@ -10,3 +10,4 @@ function collatz(num) {
   }
   return -1;
 }
+image.png
