@@ -1,18 +1,29 @@
-function solution(s, n) {
-  let result = "";
-  for (let i = 0; i < s.length; i++) {
-    if (s[i] === " ") result += " ";
-    else {
-      let charCode = s[i].charCodeAt();
-      if (charCode <= 90) {
-        charCode += n;
-        if (charCode > 90) charCode -= 26;
-      } else {
-        charCode += n;
-        if (charCode > 122) charCode -= 26;
-      }
-      result += String.fromCharCode(charCode);
-    }
+function solution(n) {
+  const arr = [];
+  while(n >= 0){
+      arr.push(n % 10);
+      n = Math.floor(n / 10);
+      if(n == 0) break;
   }
-  return result;
+  return arr;
 }
+/* 과정
+1. n을 배열화 => Array.from() : ()로부터 . 찍고 array를 만들다.
+2. 배열을 뒤집기 => sort((a,b) => a - b) 
+*/
+
+/* 자바스크립트는 정수를 문자열로 바꾸지 않을 경우 배열화가 불가능한 것인가?
+=> 유용한 메서드를 사용하기 위해서는 문자열로 바꾼뒤 사용해야 한다. 
+*/
+
+/* 문제 나누기
+1. 문자열 x => 속도 개판남
+2. %10 으로 arr.push 할 경우 역순으로 가능 => 한번 더 생각해봐도 ok? => ok
+*/
+
+
+/* sort 에 대한 이해
+=> sort란? 분류하다. 분류하기 위해서 적어도 1개가 아니여야 한다. 
+=> 시간이 없다. 비동기로  
+=> map에 대한 이해 비동기로
+*/
