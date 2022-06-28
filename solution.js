@@ -1,29 +1,31 @@
-function solution(n) {
-  const arr = [];
-  while(n >= 0){
-      arr.push(n % 10);
-      n = Math.floor(n / 10);
-      if(n == 0) break;
+function solution(s) {
+  let innerCount;
+  let temp = 0;
+  const arr = s.split("");
+  while (true) {
+    for (let i = 0; i < arr.length - 1; i++) {
+      if (arr[i] == arr[i + 1]) {
+        arr.splice(i,i+2);
+        break;
+      }
+      if(i == arr.length - 2) return 0;
+      if(arr.length == 0) return 1;
+    }
+    if(arr.length == 0) return 1;
   }
-  return arr;
 }
-/* 과정
-1. n을 배열화 => Array.from() : ()로부터 . 찍고 array를 만들다.
-2. 배열을 뒤집기 => sort((a,b) => a - b) 
-*/
 
-/* 자바스크립트는 정수를 문자열로 바꾸지 않을 경우 배열화가 불가능한 것인가?
-=> 유용한 메서드를 사용하기 위해서는 문자열로 바꾼뒤 사용해야 한다. 
-*/
+/* 1. 문제 풀이 순서
+=> split
+=> 외부 반복 while => 내부반복의 횟수가 끝까지 간 경우 멈춤 => 배열의 길이가 0이 아닐 경우 0 return 성공 1 return 
+=> 내부 반복 while => 같을 경우 까지
+=> 0,1 index 비교 => 같을 경우 substr
+                  => 다를 경우 지나감
+0 1 2 3 4 5
+length = 6
+last i + 1 = 5
+즉, i가 4까지 진행 뒤 break 
 
-/* 문제 나누기
-1. 문자열 x => 속도 개판남
-2. %10 으로 arr.push 할 경우 역순으로 가능 => 한번 더 생각해봐도 ok? => ok
-*/
-
-
-/* sort 에 대한 이해
-=> sort란? 분류하다. 분류하기 위해서 적어도 1개가 아니여야 한다. 
-=> 시간이 없다. 비동기로  
-=> map에 대한 이해 비동기로
+1. 변화가 없는 경우
+2. for 문이 끝까지 돈 경우
 */
