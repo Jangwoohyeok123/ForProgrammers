@@ -1,98 +1,67 @@
-var family = {
-  address: "Seoul",
-  members: {},
-  addFamily: function (age, name, role) {
-    this.members[role] = {
-      age: age,
-      name: name,
-    };
-  },
-  getHeadcount: function () {
-    // family의 수는 members 개체 안에 들어가 있다.
-    return Object.keys(this.members).length;
-  },
+/* 너비우선 탐색
+1. 루트 노드에서 시작해서 인접한 노드를 먼저 탐색하는 방법을 말함
+2. 노드란? => 분기 점, 각 항목을 의미함
+*/
+
+/*
+1. 시작노드를 방문
+2. 시작노드와 인접한 노드를 순차적으로 방문
+    인접한 노드가 없을 경우 종료
+3. a와 이웃한 노드b를 방문헀다면, 
+*/
+
+const graph = {
+  A: ["B", "C"],
+  B: ["A", "D"],
+  C: ["A", "G", "H", "I"],
+  D: ["B", "E", "F"],
+  E: ["D"],
+  F: ["D"],
+  G: ["C"],
+  H: ["C"],
+  I: ["C", "J"],
+  J: ["I"],
 };
 
-console.log(Object.keys(family).length);
-// expected : 4
+const bfs = (graph, startNode) => {
+  const visited = []; // 탐색을 마친 노드들
+  const needVisit = []; // 탐색을 해야할 노드들
 
-// 즉, 객체이름[key]=value
-// [  ] 안에 key를 넣어 value를 추출하는 구조
-const object1 = {
-  a: "somestring",
-  b: 42,
-  c: false,
-};
+  needVisit.push(startNode); // 노드 탐색시작
 
-console.log(Object.keys(object1));
-console.log(object1["a"]);
-// expected output: Array ["a", "b", "c"]
-// 객체의 키를 작성할 경우에는 문자열을 따지지 않는다.
-// 하지만 []을 통해 접근하려고 할 경우 문자열을 따진다.
-
-class Stack {
-  constructor() {
-    this.arr = [];
-    this.index = 0;
-  }
-  push(item) {
-    this.arr[this.index++] = item;
-  }
-  pop(item) {
-    if (this.index <= 0) return null;
-    const result = this.arr[this.index];
-    this.arr[this.index--] = null;
-    return result;
-  }
-}
-
-// this.index++ => 연산을 하고 난후 ++ 연산이 시작됨
-
-function solution(priorities, location) {
-  let answer = 1;
-
-  let printer = priorities.map((value, index) => [value, index]);
-  while (true) {
-    let tmp = printer.shift();
-    if (printer.some(value => value[0] > tmp[0])) {
-      printer.push(tmp);
-    } else {
-      if (tmp[1] === location) {
-        break;
-      } else {
-        answer += 1;
-      }
+  // 탐색 해야할 노드의 개수가 0일 때까지
+  while (needVisit.length !== 0) {
+    const node = needVisit.Shift(); // 배열의 맨 앞을 꺼냄
+    if (!visited.includes(node)) {
+      visited.push(node);
+      needVisitStack = [...needVisit, ...graph[node]];
     }
   }
-  return answer;
-}
-//정답은 1 ~ N순위까지 존재한다.
-//location을 확인하기위해 배열을 map으로 value, index의 2차배열로 변환
-//가장 앞에 있는 원소를 제거 후 tmp로 반환
-//some함수 : 배열안에 어떤것 하나라도 조건이 만족하지 않으면 false
-//true면 우선순위가 더 높은 것이 배열안에 존재하므로 맨뒤에 삽입
-//1번째 값이 location 값과 같다면 종료
-//아니면 answer += 1
+};
 
-/* map 이해하기
+// includes 함수는 배열안에 특정 값이 있는지 검사할 경우에 사용한다.
+// return 값은 bool 이다.
+
+/* 자바스크립트 ... 문법 => 비구조화 할당
+=> 배열 혹은 개체 안의 값을 편하게 쓸 수 있는 문법이다.
+=> 배열이나 객체의 값을 새로운 변수에 쉽게 할당한다.
+=> 이 문법 이전에는 변수에 값을 일일히 할당해야 했다.
 
 */
 
-const asd = [
-  { id: 0, name: "혜림", age: 6 },
-  { id: 1, name: "현일", age: 3 },
-  { id: 2, name: "현아", age: 5 },
-  { id: 3, name: "우림", age: 2 },
-];
+const obj = { a: 1, b: 2, c: 30, d: 40, e: 55 };
 
-const arr1 = asd.map(el => {
-  el.id = el.id + 1;
-  return el;
-});
+const { a, c } = obj;
+console.log(`a >>> ${a}`);
 
-console.log(arr1);
+var { a: newA = 10, f: newF = 5 } = obj;
+console.log(`newA >>> ${newA}`);
+console.log(`newF >>> ${newF}`);
+console.log(obj[a]);
 
 
-const all = 'sad';
-const xxx = all.split('');
-console.log(xxx);
+
+
+
+
+
