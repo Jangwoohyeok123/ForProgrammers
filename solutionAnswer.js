@@ -1,17 +1,27 @@
-function solution(numbers, target) {
-  let answer = 0;
-  function dfs(depth, sum) {
-    if (depth === numbers.length) {
-      if (sum === target) {
-        answer += 1;
-      }
-      return;
-    }
-    dfs(depth + 1, sum + numbers[depth]); // 왼쪽
-    dfs(depth + 1, sum - numbers[depth]); // 오른쪽
+function solution(land) {
+  for(let i=1; i<land.length; i++) {
+      land[i][0] += Math.max(
+          land[i-1][1],
+          land[i-1][2],
+          land[i-1][3],
+      );
+      land[i][1] += Math.max(
+          land[i-1][0],
+          land[i-1][2],
+          land[i-1][3],
+      );
+      land[i][2] += Math.max(
+          land[i-1][0],
+          land[i-1][1],
+          land[i-1][3],
+      );
+      land[i][3] += Math.max(
+          land[i-1][0],
+          land[i-1][1],
+          land[i-1][2],
+      );
   }
-  dfs(0, 0);
-  return answer;
+  return Math.max(...land[land.length-1]);
 }
 
 /*

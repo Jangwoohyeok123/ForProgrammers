@@ -1,0 +1,21 @@
+{
+  "name": "solution",
+  "version": "1.0.0",
+  "description": "",
+  "main": "solution.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fuck": "node --exec babel-node solution.js",
+    "answer": "node --exec babel-node solutionAnswer.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jangwoohyeok123/ForProgrammers.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jangwoohyeok123/ForProgrammers/issues"
+  },
+  "homepage": "https://github.com/Jangwoohyeok123/ForProgrammers#readme"
+}
