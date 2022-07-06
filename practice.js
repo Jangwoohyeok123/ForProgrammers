@@ -1,22 +1,101 @@
-const arr = new Array(5).fill(0).map(() => new Array(3).fill(0));
+/*
+function solution(board, moves) {
+  let answer = 0;
+  const stack = [];
+  moves.forEach(move => {
+    for(let i = 0; i < board.length; i++){
+      const item = board[i][move - 1];
+      if(item === 0) continue; // item = 0 이기 때문에 
+      if(item === stack[stack.length - 1]) {
+        stack.pop();
+        answer += 2;        
+      } else {
+        stack.push(item);
+      }
+      board[i][move - 1] = 0;
+      break;
+    }
+  });
+  return answer;
+}
 
-/* 비구조화 할당: 분해 할당, 리터럴을 분해해서 정의하겠어!
-=> 배열이나 객체의 속성을 해체하여 그 값을 개별 변수에 담을 수 있게 하는 표현식
-=> 배열 혹은 객체 안의 값을 편하게 쓸 수 있도록 하는 목적 [] {}
-=> 대입연산자의 좌우의 속성 [] {} 이 다를 경우 error 를 발생시킨다.
+// move - i 
+
+const answer = solution(
+  [
+    [0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 3],
+    [0, 2, 5, 0, 1],
+    [4, 2, 4, 4, 2],
+    [3, 5, 1, 3, 1],
+  ],
+  [1, 5, 3, 5, 1, 2, 1, 4]
+);
+
+console.log(answer);
 */
-[a1, a2, ...rest_a] = [1, 2, 3, 4, 5, 6, 7, 8];
-console.log(rest_a);
-
-/* --exec
-=> -exec의 의미는 '조건을 가지고 찾은 파일들을 대상으로 
-다음 명령어를 실행하라' 라는 의미를 가지고 있습니다.
- find 조건 -exec 실행시킬 명령어 ; 이렇게만 쓰면 
- 쉘이 ;(세미콜론)을 특수한 문자로 인식해서 find라는 
-명령어게는 ;(세미콜론)이 전달되지 않게 됩니다.2015. 2. 23.
+/*
+함수 solution은 정수 n을 매개변수로 입력받습니다.
+n의 각 자릿수를 큰것부터 작은 순으로 정렬한 새로운 정수를 리턴해주세요. 
+예를들어 n이 118372면 873211을 리턴하면 됩니다.
 */
 
-/* app.get() 의 위치와 callback 함수의 위치
-=> html method를 다뤄야 하는 callback 함수는 요청이 오기전
-=> 즉, app.get 위에 위치해야 한다.
+function solution(n) {
+  let answer;
+  answer = parseInt(n.toString().split("").sort().reverse().join(""));
+  return parseInt(n.toString().split("").sort().reverse().join(""));
+}
+
+console.log(solution(118372));
+
+function solution(n) {
+  // 문자풀이
+  // return parseInt((n+"").split("").sort().reverse().join(""));
+
+  // 숫자풀이
+  var r = 0,
+    e = 0,
+    arr = [];
+
+  do {
+    e = n % 10;
+
+    // 정렬
+    if (arr.length == 0) arr.push(e);
+    else
+      for (var i = 0, len = arr.length; i < len; i++) {
+        if (arr[i] <= e) {
+          arr.splice(i, 0, e);
+          break;
+        }
+        if (i == len - 1) arr.push(e);
+      }
+  } while (((n = Math.floor(n / 10)), n > 0));
+
+  return parseInt(arr.join(""));
+}
+
+const start = new Date();
+
+function bubbleSort(arr) {
+  for (let iter = 0; iter < arr.length - 1; iter++) {
+    for (index = 0; index < arr.length - 1 - iter; index++) {
+      if (arr[index] > arr[index + 1]) {
+        [arr[index], arr[index + 1]] = [arr[index + 1], arr[index]];
+      }
+    }
+  }
+  return arr;
+}
+
+console.log(
+  bubbleSort([
+    1, 5, 3, 7, 8, 9, 10, 1, 1, 1, 1, 2, 3, 4, 5, 6, 8, 9, 0, 3, 4, 2, 5, 6, 7,
+    1, 100
+  ])
+);
+console.log((new Date() - start) / 1000);
+
+/*
+
 */

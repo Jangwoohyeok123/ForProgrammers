@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "fuck": "node --exec babel-node solution.js",
-    "answer": "node --exec babel-node solutionAnswer.js"
+    "answer": "node --exec babel-node solutionAnswer.js",
+    "practice": "nodemon practice.js"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/Jangwoohyeok123/ForProgrammers/issues"
   },
-  "homepage": "https://github.com/Jangwoohyeok123/ForProgrammers#readme"
+  "homepage": "https://github.com/Jangwoohyeok123/ForProgrammers#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19"
+  }
 }
