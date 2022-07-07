@@ -1,12 +1,7 @@
-function solution(n) {
-  let answer = [];
-  while (n > 0) {
-    answer.push(n % 3);
-    n /= 3;
-    n = Math.floor(n);
-  }
-  answer = answer.toString(10);
-  console.log(answer);
-
-  return answer;
+function solution(numbers) {
+  var answer = numbers
+    .map(v => v + "")
+    .sort((a, b) => (b + a) - (a + b))
+    .join("");
+  return answer[0] === "0" ? "0" : answer;
 }
