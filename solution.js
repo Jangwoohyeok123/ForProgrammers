@@ -1,16 +1,11 @@
-const combinations = function(menu, order, cnt, idx, prev){
-  if(prev.length === cnt) {
-      
+function solution(citations) {
+  let answer = 0;
+  for(let h = 0; h < 1000; h++){
+      let cnt = 0;
+      citations.forEach((el) => {
+          if(el >= h) cnt++;
+      });
+      if(cnt >= h) answer = h;
   }
-}
-function solution(orders, course) {
-  let answer = [];
-  let prev_elements = [];
-  function combination(elements, k, results) {
-      if(prev_elements.length === k){
-          let str_tmp = prev_elements.
-      }
-  }
-  var answer = [];
   return answer;
 }
