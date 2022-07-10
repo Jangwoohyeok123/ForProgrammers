@@ -1,11 +1,10 @@
-function solution(citations) {
-  let answer = 0;
-  for(let h = 0; h < 1000; h++){
-      let cnt = 0;
-      citations.forEach((el) => {
-          if(el >= h) cnt++;
-      });
-      if(cnt >= h) answer = h;
-  }
-  return answer;
+function solution(n) {
+  return Math.floor(fibonacci(n) % 1234567);
+}
+
+function fibonacci(n) {
+  for(let i = 0; i < n; i++){}
+  if (n == 1) return 1;
+  if (n == 0) return 0;
+  return fibonacci(n - 1) + fibonacci(n - 2);
 }

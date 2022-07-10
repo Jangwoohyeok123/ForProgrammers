@@ -1,10 +1,8 @@
-function solution(citations) {
-  let h = 0;
-  citations = citations.sort(sorting);
-  while(citations[h] >= h + 1) h++;
-  return h;
-}
-
-function sorting(a, b) {
-  return b - a;
+function solution(n) {
+  var result = [0 , 1];
+  while ( result.length !== n + 1) {
+      var fibonacci = (result[result.length - 2] + result[result.length - 1]) % 1234567
+      result.push(fibonacci);
+  }
+   return result[n];
 }
