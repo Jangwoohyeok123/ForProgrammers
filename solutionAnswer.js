@@ -1,8 +1,5 @@
-function solution(n) {
-  var result = [0 , 1];
-  while ( result.length !== n + 1) {
-      var fibonacci = (result[result.length - 2] + result[result.length - 1]) % 1234567
-      result.push(fibonacci);
-  }
-   return result[n];
+function solution(A,B){
+  A.sort((a, b) => a - b)
+  B.sort((a, b) => b - a)
+  return A.reduce((total, val, idx) => total + val * B[idx], 0)
 }
