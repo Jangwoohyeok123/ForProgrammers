@@ -1,15 +1,16 @@
-function solution(n) {
-  let i = 1;
-  var answer = 1;
-  let sum = 0;
-  while (n / i > 2) {
-    for (let j = i; j < n; j++) {
-      sum += j;
-      if (sum > n) break;
-      if (sum == n) answer++;
+function solution(s) {
+  const sArr = [...s];
+  const stack = [];
+  for (let i = 0; i < sArr.length; i++) {
+    stack.push(sArr.shift());
+    if (
+      stack.length >= 2 &&
+      stack[stack.length - 1] == stack[stack.legnth - 2]
+    ) {
+      stack.pop();
+      stack.pop();
     }
-    i++;
-    sum = 0;
   }
-  return answer;
+
+  return stack.length == 0 ? true : false;
 }
