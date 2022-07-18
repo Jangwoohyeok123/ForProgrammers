@@ -1,11 +1,9 @@
-function recursive(i) {
-  if (i > 5) {
-    return 99;
-  }
-  console.log(i);
-  recursive(i + 2);
-  console.log(i);
-  recursive(i + 1);
+function solution(number, k) {
+  const arr = number.split("");
+  arr.sort((a, b) => b - a);
+  
+  let answer = 0;
+  return answer;
 }
 
-console.log(recursive(1));
+solution("1234567890", 2);
