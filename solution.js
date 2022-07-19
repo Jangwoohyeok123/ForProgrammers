@@ -1,27 +1,15 @@
-function solution(number, k) {
-  let answer = [];
-  const arr = number.split("");
-  arr.sort((a, b) => a - b);
-  console.log(arr);
-  
-  return answer;
-}
-function binarySearch(target, dataArray) {
-  let low = 0;
-  let high = dataArray.length - 1;
-  while (low <= high) {
-    let mid = Math.floor((high + low) / 2);
-    let guess = dataArray[mid];
-    if (guess === target) {
-      return guess;
-    } else if (guess > target) {
-      high = mid - 1;
-      
-    } else {
-      low = mid + 1;
+function solution(brown, yellow) {
+  const answer = [];
+  let total = brown + yellow;
+  for (let y = 3; y <= Math.sqrt(total); y++) {
+    const x = Math.floor(total / y);
+    if(x >= y && (x - 2) * (y - 2) === yellow) {
+      answer.push(x);
+      answer.push(y);
+      break;
     }
   }
-  return "배열안에 targetNumber가 없다.";
+  return answer;
 }
 /*
 => 정렬이 되지 않은 상황에서 이진탐색은 쓸 수 없다.
