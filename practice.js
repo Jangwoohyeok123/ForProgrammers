@@ -1,31 +1,59 @@
-function bubbleSort(data, n) {
-  for (let i = 0; i < n - 1; i++) {
-    // path의 횟수
-    for (let j = n - 1; j > i; j--) {
-      // 각 path에서 진행할 loop => i ~ n - 1
-      if (data[j - 1] > data[j]) {
-        const temp = data[j - 1];
-        data[j - 1] = data[j];
-        data[j] = temp;
-      }
+class Node {
+  constructor(data) {
+    this.data = data; // 다른 노드와 차별점을 두는 데이터
+    this.children = []; // 자식들과의 정보를 담은 배열
+  }
+
+  add(data) {
+    // 자식 추가하는 메소드
+    this.children.push(new Node(data));
+  }
+  remove(data) {
+    this.children = this.children.filter(child =>
+      child.data === data ? false : true
+    );
+  }
+}
+
+// bfs
+class Tree {
+  constructor() {
+    this.root = null;
+  }
+  // 해당층의 자식노드들을 모두 방문해야 다음 노드로 지나갈 수 있다.
+  bfs(f) {
+    // Tree.bfs(트리)
+    if (this.root === null) return;
+    const unvisitedQueue = [this.root]; // 방문하지 않은 que를 만든다.
+    while (unvisitedQueue.length !== 0) {
+      const current = unvisitedQueue.shift();
+      unvisitedQueue.push(...current.children); // 현재 부모 노드의 자식들을 모두 다 큐에 담음
+      f(current); // 현재 노드를 들고 callback 함수 실행
     }
   }
-  return data;
 }
-const dataArr = [5, 3, 3, 7, 8, 3, 5, 7, 9, 1, 2, 3, 3];
-console.log(bubbleSort(dataArr, dataArr.length));
 
-/* loop 분석
-outer loop : path의 횟수
-nest loop : 배열의 길이 - 1 ; > i ; j-- 
-=> 배열을 하나의 막대기라고 생각할 경우 패스가 1회 진행될 경우 막대기 길이가 1만큼 작아진다고 생각하자.
+// 빈 트리를 생성해주고 루트 노드를 빈 나무에 심는다.
+const t = new Tree(); // 빈 트리를 생성해 주고
+t.root = new Node("a"); // 루트가 node 'a'의 주소를 가리키면
+t.root.add("b"); // a의 자식 'b', 'c'
+t.root.add("c");
+t.root.children[0].add("d"); // 'b'의 자식으로 'd'가 추가된다.
+
+/*
+부모는 자식노드들의 주소를 갖고 있는다.
 */
 
-/* 
-버블 정렬 : 오름차순
-=> 먼저 끝에 있는 두 요소부터 시작
-=> index가 n개인 경우 n - 1 비교, 교환을 하고 나면 가장 작은 요소가 맨 처음으로 이동
-=> 이런 일련의 과정을 패스라고 한다.
-  => n 개의 index가 있는 경우, n-1 개의 패스가 존재
-  => 패스를 k번 수행할 경우 앞에서 부터 요소 k가 정렬된다.
-*/
+const node = new Node(3);
+const temp = new Tree();
+
+let all = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
+];
+for (let [a, b] of wires) {
+  all[a][b] = 1;
+  all[b][a] = 1;
+}
+console.log(all);

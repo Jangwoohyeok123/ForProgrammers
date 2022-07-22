@@ -1,27 +1,32 @@
-const solution = (brown, yellow) => {
-  let answer = [];
-  const total = brown + yellow;
-
-  for (let y = 3; y <= total; y++) {
-      const x = total / y;
-      if (Number.isInteger(x) && x >= y && (x - 2) * (y - 2) === yellow) {
-          answer.push(x);
-          answer.push(y);
-          break;
-      }
+function solution(n, wires) {
+  let answer = Number.MAX_SAFE_INTEGER;
+  let visited = Array.from({ length: n + 1 }, () => 0);
+  let count = 1;
+  let graph = Array.from(Array(n + 1), () => Array(n + 1).fill(0));
+  for (let [a, b] of wires) {
+    graph[a][b] = 1;
+    graph[b][a] = 1;
   }
 
-  return answer;
-};
+  function DFS(L) {
+    for (let i = 1; i <= n; i++) {
+      if (visited[i] === 0 && graph[L][i] === 1) {
+        visited[L] = 1;
+        count++;
+        DFS(i);
+        visited[L] = 0;
+      }
+    }
+  }
 
-/* sudo 
-구해야 할 변수는 2개이다. 
-변수의 정의
-노란색의 가로 : x
-노란색의 세로 : y
-노란색의 개수 : x * y => 이는 전체 사각형의 (가로 - 2) * (세로 - 2)
-와 같다.
-변수가 두 개 이지만, loop를 2개 돌필요가 없다.
-일반적으로 구해야 할 변수들의 관계가 일반화가 가능하다면, (const x = total / y)
-하나의 루프를 통해 해결 가능할 수 있다는 것을 생각하면 좋다. 
-*/
+  for (let [a, b] of wires) {
+    graph[a][b] = 0;
+    graph[b][a] = 0;
+    count = 1;
+    DFS(1);
+    graph[a][b] = 1;
+    graph[b][a] = 1;
+    answer = Math.min(answer, Math.abs(n - count - count));
+  }
+  return answer;
+}
