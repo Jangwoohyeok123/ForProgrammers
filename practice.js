@@ -44,16 +44,12 @@ t.root.children[0].add("d"); // 'b'의 자식으로 'd'가 추가된다.
 부모는 자식노드들의 주소를 갖고 있는다.
 */
 
-const node = new Node(3);
-const temp = new Tree();
-
-let all = [
-  [1, 2],
-  [3, 4],
-  [5, 6],
-];
-for (let [a, b] of wires) {
-  all[a][b] = 1;
-  all[b][a] = 1;
+const foo = () => {
+  bar()
+  console.log('foo')
 }
-console.log(all);
+const bar = () => {
+  console.log('bar')
+}
+foo();
+console.log('foo and bar')

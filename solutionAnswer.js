@@ -1,32 +1,17 @@
-function solution(n, wires) {
-  let answer = Number.MAX_SAFE_INTEGER;
-  let visited = Array.from({ length: n + 1 }, () => 0);
-  let count = 1;
-  let graph = Array.from(Array(n + 1), () => Array(n + 1).fill(0));
-  for (let [a, b] of wires) {
-    graph[a][b] = 1;
-    graph[b][a] = 1;
-  }
-
-  function DFS(L) {
-    for (let i = 1; i <= n; i++) {
-      if (visited[i] === 0 && graph[L][i] === 1) {
-        visited[L] = 1;
-        count++;
-        DFS(i);
-        visited[L] = 0;
+function solution(priorities, location) {
+  var answer = 0;
+  let documents = priorities.map((priority, index)=> ({location: index, priority: priority}))
+  let locationPrinted = false
+  while(!locationPrinted){
+      const shifted = documents.shift()
+      let printAvailable = true
+      if(documents.some((document)=> shifted.priority < document.priority)) printAvailable = false
+      if(printAvailable){
+          answer += 1
+          if(shifted.location === location) locationPrinted = true
+      }else{
+          documents.push(shifted)
       }
-    }
-  }
-
-  for (let [a, b] of wires) {
-    graph[a][b] = 0;
-    graph[b][a] = 0;
-    count = 1;
-    DFS(1);
-    graph[a][b] = 1;
-    graph[b][a] = 1;
-    answer = Math.min(answer, Math.abs(n - count - count));
   }
   return answer;
 }
